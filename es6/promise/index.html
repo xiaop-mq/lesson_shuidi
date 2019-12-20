@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 前端，（页面端） 
+  小程序端 
+  页面只是模板  ejs , 数据何来？
+  js 主动拉 fetch ajax  -->
+  <div id="fields"></div>
+  <script>
+      //首先声明两个常量 许诺言
+  const streetCarsPromise = fetch('http://data.ratp.fr/api/datasets/1.0/search/?q=paris');
+  const postPromise = fetch('https://wesbos.com/wp-json/wp/v2/posts');
+//   Promise.
+// postPromise.then(response => response.json())
+// .then(data =>{
+//     console.log(data);
+// })数据的输出打印
+//打印输出所有数组
+Promise
+.all([postPromise,streetCarsPromise])
+.then(responses =>{
+    return Promise.all(responses.map(res =>res.json()))
+    // 需要返回promise
+})
+// 1.需要把它变成JSON() 文件流数组变成JSON即 json=>数组map
+// 2.再变成PROMISE数组 使用.then
+.then(responses =>{
+    console.log(responses)
+})
+//   // 等我取数据 
+//   .then(response => response.json())
+//   //.then把异步变成同步 
+//   // 到达的是流数据
+//   .then(res => {
+//       //=>代表的是字符串模板的符号 可以在后面不用添加号
+//     // console.log(res);
+//     const fields = res.datasets[0].fields;
+//     console.log(fields);
+//     document.getElementById('fields').innerHTML = fields
+//       .map(field => `
+//         <div>
+//           ${field.type}- ${field.name}
+//         </div>`
+//       ).join('')
+//   })
+  </script>
+</body>
+</html>

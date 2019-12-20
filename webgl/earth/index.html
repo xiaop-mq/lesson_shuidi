@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- three.js 开发虚拟框架 -->
+    <title>three.js canvas -geometry - earth</title>
+    <!-- 从cdn引入 内容开发网站 好处是速度更快 -->
+    <script src="https://cdn.bootcss.com/three.js/r83/three.min.js"></script>
+</head>
+<body>
+    <canvas id="webglcanvas"></canvas>
+    <script>
+    var canvas,//3d 渲染 webgl canvas就是个容器
+        camera,//相机功能
+        scene,//场景功能 选择
+        renderer;// 渲染器
+        var mouseX = mouseY = 0;
+
+        var windowHalfX = window.innerWidth / 2;
+        var windowHalfY = window.innerHeight / 2;
+        init();
+        animate();
+        //导演 拿着相机 找到演员 摆好Pose 动起来
+        // canvas 就是录影机，将它播放出来
+        function init(){
+            canvas = document.getElementById('webglcanvas');
+            camera = new THREE.PerspectiveCamera(//透视投影相机 THREE命名的空间
+                60,window.innerWidth/window.innerHeight,1,2000); 
+                camera.position.z = 500;
+
+                scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xffffff);
+
+                group = new THREE.Group();
+                scene.add(group);
+                
+                var loader = new THREE.TextureLoader();
+                //loader用于加载图片
+                loader.load('land_ocean_ice_cloud_2048.jpg',
+                function(texture){
+                    //代表图片已经加载完
+                    var geometry = new THREE.SphereGeometry(200,20,20);
+                    var material = new THREE.MeshBasicMaterial({
+                        map:texture
+                    });
+                    //有3dmax人员帮忙建模
+                    var mesh = new THREE.Mesh(geometry,material);
+                    group.add(mesh);
+                }) 
+                renderer = new THREE.WebGLRenderer({
+                    canvas:canvas,
+                    antialias:true,
+                })
+                renderer.setSize(window.innerWidth,window.innerHeight);
+                document.addEventListener('mousemove',onDocumentMouseMove);
+                window.addEventListener('resize',onWindowResize,false);
+                // renderer.render(scene,camera);
+            }
+            function animate(){
+                requestAnimationFrame(animate);//请求关键帧
+                render();
+            }
+            function render(){
+                camera.position.x +=(mouseX - camera.position.x)*0.05;
+                camera.position.y +=(-mouseY - camera.position.y)*0.05;
+                camera.lookAt(scene.position);
+                group.rotation.y -=0.005;//旋转速度
+                renderer.render(scene,camera);
+            }
+            function onDocumentMouseMove(event){
+                // console.log(event.clientX,event.clientY);
+                mouseX = event.clientX - windowHalfX;
+                mouseY = event.clientY - windowHalfY;
+            }
+            function onWindowResize(){
+                windowHalfX = window.innerWidth / 2;
+                windowHalfY = window.innerHeight / 2;
+                camera.aspect = window.innerWidth/window.innerHeight;
+                renderer.setSize(window.innerWidth,window.innerHeight);        
+            }
+    </script>
+</body>
+</html>

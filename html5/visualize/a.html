@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: green;
+    position: absolute;
+    left: 0;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <script>
+  const box = document.querySelector('.box');
+  let dis = 0;
+//  let interval = setInterval(() => {
+//     box.style.left = ++dis + 'px'; //字符串拼接 每16毫秒移动
+//     if (dis >= 500){
+//         clearInterval(interval);
+//     }
+//   }, 6);
+ //电脑设置过电脑频率 每秒刷多少帧
+//requestAnimotionFrame 请求运动帧
+//怎么让界面更流畅
+ function animation() {
+     requestAnimationFrame(function(){
+        //  console.log('----');
+        body.style.left = ++dis +'px';
+        if (dis < 500) 
+         animation();//递归
+     });
+ }
+ animation();
+  </script>
+</body>
+</html>

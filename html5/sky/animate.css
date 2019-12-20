@@ -1,0 +1,14 @@
+
+    .skyscrapper{
+        border: 1px solid black;
+        height: 208px;
+        width: 598px;
+        overflow: hidden;
+    }
+    .box{
+        background-color: black;
+        width: 50px;
+        height: 50px;
+        /* margin: 10px auto; 左右是auto所以会居中*/
+        margin: 10px auto;
+    }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        canvas{
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas"></canvas>
+    <script>
+        const canvas=document.getElementById('myCanvas');
+        var ctx=canvas.getContext('2d');//上下文绘制环境
+        ctx.fillStyle='red';
+        ctx.fond="50px Verdana";
+        ctx.fillText(1,100,100);//把一画到（100，100）位置上
+        let dis=1;
+        function animation(){
+        //把一画到（100，100）位置上
+        requestAnimationFrame(function(){//与电脑刷帧频率一致
+        ctx.clearRect(0,0,300,150);//擦除
+        // ctx.fillText(++dis,Math.random()*300,Math.random()*150);
+        ctx.fillText(++dis,200,100);
+        animation();//递归算法 自己调用自己 会出现内存泄漏 无法退出 
+        })   
+    }
+    animation();//请求运动帧
+
+
+        // convas.width='100vw';
+        // canvas.style.width='50vw';//全画布显示
+        // canvas.style.height='50vh';//
+
+        // canvas.width=window.innerWidth;
+        // canvas.height=window.innerHeight;//占据整个屏幕
+
+        // convas.style.width='100vw';
+        // canvas.width='50';//canvas.width='50vw'或'50px'都没用
+        // canvas.height=window.innerHeight;//占据整个屏幕
+    </script>
+</body>
+<html>

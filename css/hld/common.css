@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #1acbfc;
+}
+.traffic-light {
+  position: absolute;
+  width: 10em;
+  height: 22.5em;
+  top: 50%;
+  left: 50%;
+/*向左向上*/
+  transform: translate(-50%, -50%);
+  background-color: #333;
+  border: 0.5em solid #eee;
+  border-radius: 2em;
+  z-index: 10;
+}
+.traffic-light::before {
+  content: "";
+  width: 3em;
+  height: 8em;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #eee;
+}
+.light {
+  width: 6em;
+  height: 5em;
+  background-color: #000;
+  border-radius: 50%;
+  margin: 1em auto;
+}
