@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>1</title>
+</head>
+<body>
+    <script>
+        var saleOffices = {
+            name:'万科润园'
+        };//发布者
+        //发布 售房信息 售楼部
+        //多个事件订阅时，
+        saleOffices.clientList = [];//构建订阅者
+        // 要有生成发布订阅的关系
+        saleOffices.listen = function(fn){
+            this.clientList.push(fn);
+        }
+        saleOffices.trigger = function(){
+            for(var i = 0,fn; fn = this.clientList[i++];)
+            {
+                fn.apply(this,arguments);
+                // fn.call(call,...arguments);
+            }//for循环优化政策
+        }
+
+        saleOffices.listen(function(price,squareMeter){
+            console.log('小彭订阅了')
+            console.log('楼盘名' + this.name);
+            console.log('价格=' + price);
+            console.log('squareMeter=' + squareMeter);
+        });
+        saleOffices.listen(function(price,squareMeter){
+            console.log('小盛订阅了')
+            console.log('楼盘名' + this.name);
+            console.log('价格=' + price);
+            console.log('squareMeter=' + squareMeter);
+        });
+        saleOffices.trigger(20000,88);//触发
+        setTimeout(() => {
+            saleOffices.trigger(24000,110)
+        },5000)//5秒钟之后就自动跳出来
+        </script>
+</body>
+</html>
