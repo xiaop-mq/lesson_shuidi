@@ -1,0 +1,9 @@
+body{
+    padding: 50px;
+    font:14px sans-serif;
+    /* sans-serif就是无衬线字体，是一种通用字体族 */
+    background-color: pink;
+}
+a{
+    color: #00B7ff;
+}
