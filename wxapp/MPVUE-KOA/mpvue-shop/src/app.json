@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/topic/main",
+    "pages/kind/main",
+    "pages/car/main",
+    "pages/mine/main",
+    "pages/mappage/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "网易严选",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#666",
+    "backgroundColor": "#fafafa",
+    "selectedColor": "#b4282d",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath":"pages/index/main",
+        "iconPath":"static/images/ic_menu_choice_nor.png",
+        "selectedIconPath":"static/images/ic_menu_choice_pressed.png",
+        "text":"首页"
+      },
+      {
+        "pagePath":"pages/topic/main",
+        "iconPath":"static/images/ic_topic_choice_nor.png",
+        "selectedIconPath":"static/images/ic_topic_choice_pressed.png",
+        "text":"专题"
+      },
+      {
+        "pagePath":"pages/kind/main",
+        "iconPath":"static/images/ic_kind_choice_nor.png",
+        "selectedIconPath":"static/images/ic_kind_choice_pressed.png",
+        "text":"分类"
+      },
+      {
+        "pagePath":"pages/car/main",
+        "iconPath":"static/images/ic_car_choice_nor.png",
+        "selectedIconPath":"static/images/ic_car_choice_pressed.png",
+        "text":"购物车"
+      },
+      {
+        "pagePath":"pages/mine/main",
+        "iconPath":"static/images/ic_mine_choice_nor.png",
+        "selectedIconPath":"static/images/ic_mine_choice_pressed.png",
+        "text":"我的"
+      }
+    ],
+    "position": "bottom"
+  }
+}
