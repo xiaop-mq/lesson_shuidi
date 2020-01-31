@@ -11,24 +11,27 @@
 </template>
 
 <script>
+import amapFile from "../../utils/amap-wx.js";
+import { mapState, mapMutations } from "vuex";
 export default {
   data () {
     return {
-      cityName: '南昌'
-    }
+      }
+    },
+    computed: {
+    ...mapState(["cityName"])
   },
   methods: {
-    toMappage () {
-      //通过wx.getSetting 先查询用户是否授权 "scoped.record"
-    let _this = this;
-     wx.getSetting({
+    ...mapMutations(["update"]),
+    toMappage() {
+      var _this = this;
+      // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
+      wx.getSetting({
         success(res) {
           //如果没有同意授权,打开设置
-          // console.log(res)
           if (!res.authSetting["scope.userLocation"]) {
             wx.openSetting({
               success: res => {
-                //获取授权位置信息
                 _this.getCityName();
               }
             });
@@ -37,28 +40,37 @@ export default {
               url: "/pages/mappage/main"
             });
           }
-        },
-        fail: (err) =>{
-          console.log(err)
-        },
-        complete: () =>{}
+        }
       });
     },
-    getCityName(){
-      let _this = this
-      var myAmapFun = new amapFile.AMapWX({key:'9ab49e4ca7a9bb17052e9678f50a765e'});
+    getCityName() {
+      var _this = this;
+      var myAmapFun = new amapFile.AMapWX({
+        key: "2fc2b5d1a061327f2b6a121d89d59466"
+      });
       myAmapFun.getRegeo({
-        success:function(data){
+        success: function (data) {
           //成功回调
-          console.log(data)
+          console.log(data);
+          // data[0].regeocodeData.formatted_address
+          // _this.cityName = data[0].regeocodeData.formatted_address;
+          _this.update({ cityName: data[0].regeocodeData.formatted_address });
         },
-        fail:function(info){
+        fail: function (info) {
           //失败回调
-          console.log(info)
-          _this.cityName = '北京'
+          console.log(info);
+          //如果用户拒绝授权
+          // 默认为北京
+          _this.cityName = "北京市";
+          _this.update({ cityName: "北京市" });
         }
-      })
-    }
+      });
+    },
+    toSearch() {
+      wx.navigateTo({
+        url: "/pages/search/main"
+      });
+    },
   }
 }
 </script>

@@ -2,12 +2,13 @@
   "pages": [
     "pages/index/main",
     "pages/topic/main",
-    "pages/kind/main",
-    "pages/car/main",
-    "pages/mine/main",
+    "pages/category/main",
+    "pages/cart/main",
+    "pages/my/main",
     "pages/mappage/main"
   ],
   "window": {
+    "backgroundColor":"#fafafa",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "网易严选",
@@ -20,36 +21,42 @@
     "borderStyle": "white",
     "list": [
       {
-        "pagePath":"pages/index/main",
-        "iconPath":"static/images/ic_menu_choice_nor.png",
-        "selectedIconPath":"static/images/ic_menu_choice_pressed.png",
-        "text":"首页"
+        "text": "首页",
+        "pagePath": "pages/index/main",
+        "iconPath": "static/images/ic_menu_choice_nor.png",
+        "selectedIconPath": "static/images/ic_menu_choice_pressed.png"
       },
       {
-        "pagePath":"pages/topic/main",
-        "iconPath":"static/images/ic_topic_choice_nor.png",
-        "selectedIconPath":"static/images/ic_topic_choice_pressed.png",
-        "text":"专题"
+        "text": "专题",
+        "pagePath": "pages/topic/main",
+        "iconPath": "static/images/ic_menu_topic_nor.png",
+        "selectedIconPath": "static/images/ic_menu_topic_pressed.png"
       },
       {
-        "pagePath":"pages/kind/main",
-        "iconPath":"static/images/ic_kind_choice_nor.png",
-        "selectedIconPath":"static/images/ic_kind_choice_pressed.png",
-        "text":"分类"
+        "text": "分类",
+        "pagePath": "pages/category/main",
+        "iconPath": "static/images/ic_menu_sort_nor.png",
+        "selectedIconPath": "static/images/ic_menu_sort_pressed.png"
       },
       {
-        "pagePath":"pages/car/main",
-        "iconPath":"static/images/ic_car_choice_nor.png",
-        "selectedIconPath":"static/images/ic_car_choice_pressed.png",
-        "text":"购物车"
+        "text": "购物车",
+        "pagePath": "pages/cart/main",
+        "iconPath": "static/images/ic_menu_shoping_nor.png",
+        "selectedIconPath": "static/images/ic_menu_shoping_pressed.png"
       },
       {
-        "pagePath":"pages/mine/main",
-        "iconPath":"static/images/ic_mine_choice_nor.png",
-        "selectedIconPath":"static/images/ic_mine_choice_pressed.png",
-        "text":"我的"
+        "text": "我的",
+        "pagePath": "pages/my/main",
+        "iconPath": "static/images/ic_menu_me_nor.png",
+        "selectedIconPath": "static/images/ic_menu_me_pressed.png"
       }
     ],
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+      }
+    },
+    
     "position": "bottom"
   }
 }
