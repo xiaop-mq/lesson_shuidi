@@ -1,5 +1,6 @@
 <template>
 <div class="index">
+  <!-- 头部的搜索  -->
     <div class="search">
       <div @click="toMappage">{{cityName}}</div>
       <div @click="toSearch">
@@ -7,15 +8,29 @@
         <span class="icon"></span>
       </div>
     </div>
+    <div class="swiper">
+      <!-- swiper滑屏轮播 indicator-dots是否展示轮播图上面的点 自动轮播 轮播间隔时间为3秒 circular循环不间断的轮播 duration图片之间的推动feel -->
+      <swiper class="swiper-container" indicator-dots="true" autoplay="true" interval="3000" circular="true" duration="500">
+        <!-- 无具体意义 代表插入一个标签 -->
+        <block v-for="(item,index) in banner" :key="index">
+          <!-- 每一张轮播图 -->
+          <swiper-item class="swiper-item">
+            <image class="slide-image" :src="item.image_url"/>
+          </swiper-item>
+        </block>
+      </swiper>
+    </div>
 </div>
 </template>
 
 <script>
 import amapFile from "../../utils/amap-wx.js";
 import { mapState, mapMutations } from "vuex";
+import { get } from '../../utils'
 export default {
   data () {
     return {
+      banner:[]
       }
     },
     computed: {
@@ -71,6 +86,11 @@ export default {
         url: "/pages/search/main"
       });
     },
+
+    async getData(){
+      const data = await get('/index/index')//http://localhost:5757/lm/index/index
+      console.log(data)
+    }
   }
 }
 </script>
