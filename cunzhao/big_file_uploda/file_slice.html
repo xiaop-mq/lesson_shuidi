@@ -30,9 +30,9 @@
                 xhr.onload = e => {
                     resolve({
                         data: e.target.response
-                    })
+                    });
                 }
-            })
+            });
         }
         const mergeRequest = async ()=>{
             await request({
