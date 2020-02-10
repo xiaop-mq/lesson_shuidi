@@ -1,5 +1,6 @@
 const path = require('path');
 const fse = require("fs-extra");
+const multiparty = require('multiparty');
 const UPLOAD_DIR = path.resolve(__dirname, "..", "target");
 
 const extractExt = filename =>
@@ -42,5 +43,22 @@ module.exports = class {
                 })
             )
         }
+    }
+    async handleFormData(req,res){
+        //处理带有文件上传的表单
+        const multiparty = new multiparty.Form;
+        multiparty.parse(req,async (err, fields, files) => {
+            if(err) {
+                console.error(err);
+                res.status = 500;
+                res.end("process file chunk failed");
+                return;
+            }
+            const [chunk] = files.chunk;
+            const [hash] = fileds.hash;
+            const [fileHash] = fileds.fileHash;
+            const [filename] = fileds.filename;
+            console.log(chunk,hash,fileHash,filename);
+        })
     }
 }

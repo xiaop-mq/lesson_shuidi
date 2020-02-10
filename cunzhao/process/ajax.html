@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 应用程序运行时，本质是CPU行使的权利，分配资源最小的单元
+        // 进程是线程的容器 线程时CPU计算的最小单元
+        // 单线程 一个进程只产生一个线程
+        var a = 1,b = 2,c = a + b;// UI的界面
+        const xhr = new XMLHttpRequest();//js主动向服务器端发送请求返回数据
+        xhr.open('GET','http://localhost:3333');
+        xhr.send();
+        //xhr 到底是什么?谁派来的?
+        xhr.onload = (e) => {//事件监听 event 事件机制,event loop
+            console.log(e.target.response);
+        }
+        //UI主要渲染
+        console.log('hello');  //UI的界面
+    </script>
+</body>
+</html>

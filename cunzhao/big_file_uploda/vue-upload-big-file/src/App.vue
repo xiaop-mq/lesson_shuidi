@@ -29,7 +29,9 @@ export default {
       hash: "" //哈希
     },
     status: Status.wait,
-    hashPercentage: 0
+    hashPercentage: 0,
+    data:[],//上传的数据
+    requestList:[]//xhr
   }),
   methods: {
     request({
@@ -47,10 +49,19 @@ export default {
         );
         xhr.send(data);
         xhr.onload = e => {
+          if(requestList){
+            // xhr 使命完成
+            const xhrIndex = requestList.findIndex(item => item === xhr);
+            requestList.splice(xhrIndex, 1);
+          }
           resolve({
             data: e.target.response
           });
         };
+        if (requestList) {
+          requestList.push(xhr);//每个请求
+          console.log(requestList);
+        }
       });
     },
     async calculateHash(fileChunkList) {
@@ -88,6 +99,47 @@ export default {
         this.container.hash
       );
       console.log(shouldUpload, uploadedList);
+      if (!shouldUpload){
+        this.$message.success("秒传：上传成功");
+        this.status = Status.wait;
+        return ;
+      }
+      this.data = fileChunkList.map(({ file },index) => ({
+        fileHash: this.container.hash,//文件的hash
+        index,
+        hash: this.container.hash + "-" +index,//每个块都有自己的index在内的hsah,可排序，可追踪
+        chunk:file,
+        size: file.size,
+        percentage:uploadedList.includes(index)?100:0//当前切片是否已上传过
+      }));
+      await this.uploadChunks(uploadedList);//上传切片
+    },
+    async uploadChunks (uploadedList = []){
+      // console.log(this.data);
+      // 数据数组this.data => 请求数组 =》 并发
+      const requestList = this.data
+       .map( ( {chunk,hash,index} ) => {
+         const formData = new FormData();//js form
+         formData.append("chunk",chunk);//文件 blob
+         formData.append("hash",hash);//切片hash 
+         formData.append("filename",
+          this.container.file.name);
+          formData.append("fileHash",this.container.hash)//文件hash
+          return { formData, index}
+       })
+       .map(async ({formData, index }) => 
+       this.request({
+         url:"http://localhost:3000",
+         data:formData,
+         onProgress:this.createProgressHandler(this.data[index]),
+         requestList:this.requestList//?
+       })
+      )
+      await Promise.all(requestList);
+      console.log('可以发送合并请求了');
+    },
+    createProgressHandler(){
+      
     },
     async verifyUpload(filename, fileHash) {
       const { data } = await this.request({
