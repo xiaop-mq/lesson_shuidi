@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Foo(e) {
+            this.name = 'xiaop'
+            this.age = e
+            return 1
+        }
+        function objectFactory() {
+            const obj = {} //1
+            const Constructor = [].shift.call(arguments) //3 [].shift删除数组的第一项 使用.call方式将数组放入argument中
+            // const [Constructor,...args] = [...arguments]//数组的结构
+            
+            
+            //原型连接
+            obj._proto_ = Constructor.prototype //5
+           const ret = Constructor.apply(obj,arguments) //4
+            // return obj //2
+            return typeof ret === 'object'? ret : obj
+        }
+        console.log(new Foo(18))
+        //    console.log(objectFactory(Foo,18))
+
+
+
+
+
+
+
+        //    prototype
+        //    _proto_
+        //    function abc(){}
+        //    abc.prototype --> {constructor: f}
+        //    [[prototype]]
+        //    隐式原型指向这个对象函数的prototype
+
+        //    function Abc() {
+        //        this.name = 'xiaop'
+        //    }
+        //    let test = new Abc()
+        //    test._proto_
+    </script>
+</body>
+</html>
