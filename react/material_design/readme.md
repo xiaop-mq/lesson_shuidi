@@ -1,11 +1,19 @@
 # material design 来自google的UI风格
 
+react基础语法
+https://blog.csdn.net/weixin_41012753/article/details/78771436
 
+before after 伪元素
+https://blog.csdn.net/qq_34579060/article/details/80510759
 特别？
 从css 风格->组件->react入门
 
 波浪的感觉？
 css 思路
+
+Browser.js
+JSX 语法转为 JavaScript 语法
+
 - material design 的灵魂，在于对交互的创新
   波浪感，进度条的进度感
   移动端细节,cursor:pointer 用的是非button组件
