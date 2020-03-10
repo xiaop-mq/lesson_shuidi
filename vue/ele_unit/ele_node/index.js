@@ -6,9 +6,9 @@ const path = require('path');
 const router = require('./routes/index.js');
 router(app);
 // web  express.static 启用静态服务器
-// app.use('/', express.static(path.join(__dirname, 'web')));
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/admin', express.static(path.join(__dirname, 'admin')));
+app.use('/', express.static(path.join(__dirname, 'web'))); // 后端 
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/admin', express.static(path.join(__dirname, 'admin')));
 
 
 // app.use()
