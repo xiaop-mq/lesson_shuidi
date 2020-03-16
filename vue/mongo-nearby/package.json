@@ -1,0 +1,12 @@
+{
+  "name": "mongo-nearby",
+  "version": "0.1.0",
+  "description": "一  vue + mongodb 的学习   算法  全栈的开源项目/商业项目/创业项目  1. 美团 。。。仿应用    介绍项目 vue 全家桶   vue ele  star  附近商家   mongodb + vuex     写到简历上去",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "shunwuyu <shunwu2001@163.com> (http://github.com/shunwuyu)",
+  "license": "MIT"
+}
