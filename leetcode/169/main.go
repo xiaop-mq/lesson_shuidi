@@ -1,3 +1,5 @@
+package main
+
 func majorityElement(nums []int)  int{
 	majority,count := nums[0], 1
 	for i :=1; i < len(nums);	i++ {
