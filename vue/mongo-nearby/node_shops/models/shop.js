@@ -11,13 +11,13 @@ const mongoose = require('mongoose')
 const shopSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true, // 必填
+    required: true, // 必填选项
     // index: true
   },
   location: {  // lbs  latitude , longtide
     type: [Number], // [120.000, 23.444]
     index: "2d",  // ? 用来干嘛的？ 索引 
-    sparse: true
+    sparse: true 
   }
 })
 

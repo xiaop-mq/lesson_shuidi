@@ -6,7 +6,7 @@ const Shop = require('../models/shop.js');
 // 2d spare 是mongodb 内建的， 独有的功能
 // 1. NOSQL 
 // 2. 移动时代， 定位功能
-shop.get('/', async(req, res) => {
+shop.get('/', async(req, res) => { // get用于获取数据
   Shop
     .find({
       location: {
@@ -22,7 +22,7 @@ shop.get('/', async(req, res) => {
     })
 })
 
-shop.post('/', async(req, res) => {
+shop.post('/', async(req, res) => { // post 用于发送数据 数据驱动页面原理
   console.log('---shops');
   const fjnz = new Shop({
     name: '范家农庄时尚菜',

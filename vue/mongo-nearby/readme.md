@@ -11,4 +11,6 @@
 
 前后端分离
 
+2. mongodb 和 mysql 区别：
+  https://www.jianshu.com/p/56524b50b376
 

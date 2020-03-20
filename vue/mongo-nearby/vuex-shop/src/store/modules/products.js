@@ -17,7 +17,7 @@ const actions = {
   }
 }
 
-// mutations 存取数据
+// mutations
 const mutations = {
   setProducts (state, products) {
     state.all = products
