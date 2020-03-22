@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// 定义数组类型
 func singleNumber(nums []int) int {
 	res := 0
 
