@@ -27,8 +27,10 @@ const logger = (ctx, next) => {
   console.log(`${Date.now()} ${ctx.request.method} ${ctx.request.url}` )
   next();
 }
-
+// 像上面代码中的logger函数就叫做"中间件"（middleware），
+// 因为它处在 HTTP Request 和 HTTP Response 中间，用来实现某种中间功能。
 app.use(logger);
+// app.use()用来加载中间件。
 app.use(bodyParser());  // 内部的代码 await    next
 // 面试题  4月底，  vue + node 考点 
 // 加中间件， 加上一个服务
