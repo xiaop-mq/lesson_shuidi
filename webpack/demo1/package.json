@@ -1,0 +1,22 @@
+{
+  "name": "demo1",
+  "version": "1.0.0",
+  "description": "- es6 node bable loader\r - 前端生产工艺 CI CD、\r - src 开发目录\r   入口文件 main.js  宛如煮火锅\r   webpack 宛如火锅底料\r   bundle\r - js 与其他类型的文件并不是水火不相容的\r   1. 文本 \r   2. { json }",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack",
+    "build": "cross-env NODE_ENV=production webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.2",
+    "css-loader": "^3.4.2",
+    "webpack-chain": "^6.4.0"
+  }
+}
