@@ -1,35 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div class="content-box">Content box</div>
     <br>
     <div class="border-box">Border box</div>
-
+    <br>
+    <div class="sss"></span>
+    <br>
+    <div class="aside"></div>
+    <div class="text">
+        <div class="main"></div>
+    </div>
     <style>
-    div {
-    width: 160px;
-    height: 80px;
-    /* 上右下左 内距 */
-    padding: 20px;
-    border: 8px solid orange;
-    background: pink;
-    }
+        div {
+            width: 160px;
+            height: 80px;
+            /* 上右下左 内距 */
+            padding: 20px;
+            border: 8px solid orange;
+            background: pink;
+        }
 
-    /**元素的总宽度 = 160 + 20*2 + 8*2; 总高度 = 80 + 20*2 + 8*2 ; */ 
-    .content-box { 
-    box-sizing: content-box; 
-    }
+        /**元素的总宽度 = 160 + 20*2 + 8*2; 总高度 = 80 + 20*2 + 8*2 ; */
+        .content-box {
+            box-sizing: content-box;
+        }
 
-    /** 元素的总宽度 = 160; 总高度 = 80px; */  
-    .border-box { 
-    box-sizing: border-box;
-    }
-</style>
+        /** 元素的总宽度 = 160; 总高度 = 80px; */
+        .border-box {
+            box-sizing: border-box;
+        }
+
+        .sss {
+            width: 0;
+            height: 0;
+            border-top: 40px solid transparent;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 40px solid #ff0000;
+        }
+
+        .aside {
+            margin-bottom: 100px;
+            width: 100px;
+            height: 150px;
+            background: #f66;
+        }
+
+        .main {
+            margin-top: 100px;
+            height: 200px;
+            background: #fcc;
+        }
+
+        .text {
+            /*盒子main的外面包一个div，通过改变此div的属性使两个盒子分属于两个不同的BFC，以此来阻止margin重叠*/
+            overflow: hidden;
+        }
+    </style>
 
 </body>
+
 </html>
