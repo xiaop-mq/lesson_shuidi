@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function foo() {
+      // setTimeout(() => {
+      //   console.log(1);
+      // }, 2000)
+      // return 'foo';
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(123);
+        }, 2000)
+      })
+    }
+
+    function* test() {
+      console.log('start');
+      // 从 后 往 前
+      let a = yield foo();  // foo 返回一个 'foo'  不会等着 定时器 两秒过后 才执行往后的代码
+      // a ???? 和  yield 后面的值没有任何关系
+      console.log('a', a);
+      let b = yield 2;
+      console.log('b', b);
+      console.log('end');
+    }
+    let g = test();
+    // a 的值 可以通过 next 方法 传递
+    // next 传递的参数： 就是上一个 yield 的返回值
+    console.log(g.next());
+    // 插入新的任务：foo
+    // foo();
+    // foo 执行完 再启动下一步
+    console.log(g.next('A VALUE'));
+    console.log(g.next('B VALUE'));
+    // generate 内部相比普通函数而言，是可以被中止的
+    // 相比普通函数而言 调用的时候是 通过 一步步的 next 来调用的
+    // while(!g.next().done) {
+    //   g.next();
+    // }
+
+    // 协程
+    function generateAutoRun(gen) {
+      let g = gen();
+      function next(value) {
+        let res = g.next(value);
+        if (res.done) return;
+        next(res.value);
+      }
+      next();
+    }
+    generateAutoRun(test);
+  </script>
+</body>
+</html>
