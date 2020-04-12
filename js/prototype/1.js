@@ -19,24 +19,24 @@ function checkscope(){
 }
 checkscope();
 
-// // 执行过程如下：
+// 执行过程如下：
 
-// // 1.checkscope 函数被创建，保存作用域链到 内部属性[[scope]]
+// 1.checkscope 函数被创建，保存作用域链到 内部属性[[scope]]
 
-// // checkscope.[[scope]] = [
-// //     globalContext.VO
-// // ];
-// // 2.执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 函数执行上下文被压入执行上下文栈
+// checkscope.[[scope]] = [
+//     globalContext.VO
+// ];
+// 2.执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 函数执行上下文被压入执行上下文栈
 
-// // ECStack = [
-// //     checkscopeContext,
-// //     globalContext
-// // ];
-// // 3.checkscope 函数并不立刻执行，开始做准备工作，第一步：复制函数[[scope]]属性创建作用域链
+// ECStack = [
+//     checkscopeContext,
+//     globalContext
+// ];
+// 3.checkscope 函数并不立刻执行，开始做准备工作，第一步：复制函数[[scope]]属性创建作用域链
 
-// // checkscopeContext = {
-// //     Scope: checkscope.[[scope]],
-// // }
+// checkscopeContext = {
+//     Scope: checkscope.[[scope]],
+// }
 // 4.第二步：用 arguments 创建活动对象，随后初始化活动对象，加入形参、函数声明、变量声明
 // checkscopeContext = {
 //     AO: {
