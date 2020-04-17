@@ -26,3 +26,11 @@ webpack 编译  nginx docker  阿里云 build  node
   babel 
   jSX 良好表现的template 语法
 - dist 目录不删除再生成？ 历史版本都留下， 利于回滚代码
+
+-  react 语法，  ts    
+  router + redux + api 类型约束   
+- <{}> 怎么想通
+  1. App AppRouter 引入的/ 组件，  类型定义  header  html StatelessComponent
+  2. React.StatelessComponent<{}>  type 申明的类型，     定义文件 node_modules/@types/index.t.  类型定义， ts 的难点
+- bootstrap entry 多入口
+- switch 只匹配一个哦
