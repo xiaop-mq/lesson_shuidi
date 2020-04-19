@@ -10,8 +10,8 @@ module.exports = {
    extensions: ['.js', '.ts', '.tsx'], // ts typescript js  .styl .sacc
  },
  entry: {
-   app: './index.tsx', // webpack 打包入口可以多个
-   vendor: [
+   app: './index.tsx', // webpack 打包入口可以多个  业务
+   vendor: [//单独打包框架
     'react',
     'react-dom',
     'react-router-dom'
