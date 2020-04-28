@@ -1,15 +1,15 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "es6",
-      "moduleResolution": "node",
-      "declaration": false,
-      "noImplicitAny": false,
-      "jsx": "react", // tsx JSX => tsx
-      "sourceMap": true,
-      "noLib": false,
-      "suppressImplicitAnyIndexErrors": true
-    },
-    "compileOnSave": false,
-    "exclude": ["node_modules"]
-  }
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "moduleResolution": "node",
+    "declaration": false,
+    "noImplicitAny": false,
+    "jsx": "react", // tsx  JSX => tsx 
+    "sourceMap": true,
+    "noLib": false,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "compileOnSave": false,
+  "exclude": ["node_modules"]
+}
