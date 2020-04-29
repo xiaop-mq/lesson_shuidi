@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THIS</title>
+</head>
+<body>
+    <!-- <script>
+        function returnThis() {
+            console.log(this)
+            return this
+        }
+        var user1 = { name: 'xiaop' }
+
+        var user1return = returnThis.bind(user1)
+        user1return()
+
+        var user2 = { name: 'xiaop1' }
+        user1return.call(user2)
+    </script> -->
+
+    <!-- <script>
+        // function fn() {
+        //     this.user = 'xiaop'
+        //     // console.log(this)
+        //     return {}
+        // }
+        // var a = new fn
+        // // a()
+        // console.log(a.this)
+
+        // function fn() {
+        //     this.user = 'xiaop'
+        //     return function(){}
+        // }
+        // var a = new fn
+        // console.log(a.user)
+
+        // function fn() {
+        //     this.user = 'xiaop'
+        //     return 1
+        // }
+        // var a = new fn
+        // console.log(a.user)
+
+        
+        function fn() {
+            this.user = 'xiaop'
+            return null
+        }
+        var a = new fn
+        console.log(a.user)
+    </script> -->
+
+    <script>
+        function callback(qdx){
+            qdx()
+        }
+        callback(() =>{
+            console.log(this)
+        })
+
+        var user = {
+            name: 'xiaop',
+            callback:callback,
+            callback1() {
+                callback(() =>{
+                    console.log(this)
+                })
+            }
+        }
+
+        user.callback(() => {
+            console.log(this) //window
+        })
+        user.callback1(() => {
+            console.log(this) //user
+        })
+    </script>
+</body>
+</html>
