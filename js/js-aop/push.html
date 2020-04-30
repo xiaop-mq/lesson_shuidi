@@ -1,0 +1,43 @@
+<script>
+  //  push 最小的一个原子
+  function Person() {
+    this.name = 'lilei'
+  }
+  Person.prototype.say = function() {
+    return this.name;
+  } // 考虑 this 
+  function test(a, b) {
+    console.log('test 发生调用了');
+    return a + b;
+  }
+  // 每一个模块
+  test();
+  // 数组发生变化的原因？
+  // push splice pop shift
+  // 1: 保留一份最原始的方法
+  // Array.prototype.push = function() {
+  //   this ??
+  // }
+  // 定义原始代码
+  const originPush = Array.prototype.push
+  // 2: 重写 (破坏)
+  Array.prototype.push = function() {
+    console.log('arr push called');
+    // 3: 原来的 push，恢复一下
+    // es5 arguments 
+    // apply：1this  2数组传参
+    // call:每一项展开...arguments
+    originPush.call(this, ...arguments);
+  }
+
+  let arr = [0, 1, 2, 3];
+  // push 内部 this 谁调用arr 就指向谁
+  arr.push(1);
+
+  function sum(a,b,c,d,e,f,g,h,i,j) {
+    console.log(arguments);  // 参数
+  }
+  sum(1,2,3,4,5,6,7)
+
+</script>
+<script src="./dist/class.js"></script>
