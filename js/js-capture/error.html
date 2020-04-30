@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <script>
+        // 1 : 意料之中
+        // target 目标阶段
+        // dom.addEventListener('click',()=>{
+        // })
+        let obj = {
+            name1: null
+        }
+        new Promise((resolve,reject) => {
+            reject('error');
+        })
+        try {
+            setTimeout(()=>{
+                 obj.name1.a = 123;
+            })
+        }catch(error){
+            // 发送到你的服务端
+            console.log(error)
+        }
+        console.log(123)
+            console.log(456)
+        // 2: 意料之外  全局捕获
+        // 1w day 
+        // JS :ECMA(js: 词法语法语句表达式) + DOM(html元素类型，事件...)
+        // 事件模式： 捕获 冒泡
+        // process
+        window.addEventListener('error',function(err){
+            console.log(err);
+            // return false;
+            // 发送  发送给后端
+        }, false)
+        // 3: promise
+        window.addEventListener('unhandlerejection',function(err){
+            console.log(err);
+        })
+    </script>
+</body>
+</html>

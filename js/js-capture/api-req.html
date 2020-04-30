@@ -1,0 +1,60 @@
+<!-- api 请求有没有出错 -->
+<!-- axios.get('./')
+.then(res => {
+    if (res.done !== 200 ){
+        出错了 上报后端
+    }
+}) -->
+<!-- 能不能统一处理 -->
+<!-- axios 
+    js 原生 XMLhttprequest 封装出来的一个库
+    只要把 XMLhttprequest 监听请求完成的这个方法给他改掉
+    1:
+    2:
+    3:
+-->
+
+<script>
+    // document.getElementById('btn')
+    const _XMLHttpRequest = XMLHttpRequest;
+    window.XMLHttpRequest = function () {
+        const xhr = new _XMLHttpRequest();
+        xhr.addEventListener('error', () => {
+            console.log('xhr error')
+        })
+        xhr.addEventListener('timeout', () => {
+            console.log('xhr timeout')
+        })
+        // on 只能绑定一个事件 可能会覆盖别人的事件
+        // addEventListener可以绑定多个事件
+        xhr.addEventListener('readystatechange', () => {
+            if (xhr.readyState === 4) {
+                console.log(xhr.status)
+            }
+        })
+        // 改完之后,还是能生成 xhr
+        return xhr;
+    }
+</script>
+<!-- <script>
+    var xhr = new XMLHttpRequest();
+    //设置xhr请求的超时时间
+    xhr.timeout = 3000;
+    //设置响应返回的数据格式
+    xhr.responseType = "text";
+    //创建一个 post 请求，采用异步
+    xhr.open('POST', '/server', true);
+    //注册相关事件回调处理函数
+    xhr.onload = function (e) {
+        if (this.status == 200 || this.status == 304) {
+            alert(this.responseText);
+        }
+    };
+    xhr.ontimeout = function (e) { ... };
+    xhr.onerror = function (e) { ... };
+    xhr.upload.onprogress = function (e) { ... };
+
+    //发送数据
+    xhr.send(formData);
+
+</script> -->
