@@ -1,0 +1,17 @@
+{
+  "name": "mocha",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/mocha/data.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^7.1.2",
+    "should": "^13.2.3"
+  },
+  "devDependencies": {},
+  "description": ""
+}
