@@ -1,0 +1,21 @@
+<script>
+    function test(fn){
+        // your code here ...
+        setTimeout(()=>{
+            fn('hello world')
+        },3000)
+    }
+    test(function(val){
+        // val === 'hello world'
+        console.log(val)
+    })
+    // 3s输出 hello world
+    // cb -> promise -> Co(generate) -> async
+    // promise的三个状态：pending fullied reject
+    new Promise((resolve, reject) => {
+        resolve(1);
+    })
+    .then((val)=>{
+        console.log(val);
+    })
+</script>
