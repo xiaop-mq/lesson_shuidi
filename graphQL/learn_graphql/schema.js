@@ -49,4 +49,5 @@ import {
   
   export default new GraphQLSchema({
     query: QueryRootType
-    // mu
+    // mutation 
+  })
