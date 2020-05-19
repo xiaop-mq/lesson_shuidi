@@ -1,0 +1,7 @@
+{
+    "presets": [ //插件的集合 预设
+        "@babel/preset-env",
+        "@babel/preset-react"
+    ],
+    "plugins": []
+}
