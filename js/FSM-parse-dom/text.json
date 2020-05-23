@@ -1,0 +1,117 @@
+[
+    {
+      "type": "document",
+      "children": [
+        {
+          "type": "element",
+          "children": [
+            {
+              "type": "text",
+              "content": "\n "
+            },
+            {
+              "type": "element",
+              "children": [
+                {
+                  "type": "text",
+                  "content": "\n   "
+                },
+                {
+                  "type": "element",
+                  "children": [
+                    {
+                      "type": "text",
+                      "content": "\n   body div #myid {\n    width: 100px;\n    background-color: #fff; \n  }\n   "
+                    }
+                  ],
+                  "attributes": [],
+                  "tagName": "style"
+                },
+                {
+                  "type": "text",
+                  "content": "\n "
+                }
+              ],
+              "attributes": [],
+              "tagName": "head"
+            },
+            {
+              "type": "text",
+              "content": "\n "
+            },
+            {
+              "type": "element",
+              "children": [
+                {
+                  "type": "text",
+                  "content": "\n    "
+                },
+                {
+                  "type": "element",
+                  "children": [
+                    {
+                      "type": "text",
+                      "content": "\n      123\n      "
+                    },
+                    {
+                      "type": "element",
+                      "children": [
+                        {
+                          "type": "text",
+                          "content": "\n        "
+                        },
+                        {
+                          "type": "element",
+                          "children": [],
+                          "attributes": [
+                            {
+                              "name": "class",
+                              "value": "text"
+                            }
+                          ],
+                          "tagName": "span"
+                        },
+                        {
+                          "type": "text",
+                          "content": "\n      "
+                        }
+                      ],
+                      "attributes": [
+                        {
+                          "name": "id",
+                          "value": "myid"
+                        }
+                      ],
+                      "tagName": "div"
+                    },
+                    {
+                      "type": "text",
+                      "content": "\n    "
+                    }
+                  ],
+                  "attributes": [],
+                  "tagName": "div"
+                },
+                {
+                  "type": "text",
+                  "content": "\n "
+                }
+              ],
+              "attributes": [],
+              "tagName": "body"
+            },
+            {
+              "type": "text",
+              "content": "\n"
+            }
+          ],
+          "attributes": [],
+          "tagName": "html"
+        },
+        {
+          "type": "text",
+          "content": "\n"
+        }
+      ]
+    }
+  ]
