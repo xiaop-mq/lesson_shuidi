@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // fixed params 4
+        function add(a, b, c, d){
+            return a + b + c + d;
+        }
+
+        function FixedParamsCurry(fn) {
+            // [add, 1, 2]
+            var _arg = [].slice.call(arguments, 1)
+            return function(){
+                // argument[2, 3];
+                var newArg = _arg.concat( [].slice.call(arguments, 0))
+                return fn.apply(this, newArg)
+            }
+        }
+        // var newAdd = FixedParamsCurry(add, 1, 2)
+        // console.log( newAdd(2, 3));
+        // fixed params fn
+        
+        function Curry(fn, length){
+            // length
+            var length = length || fn.length;
+            return function(){
+                if(arguments.length < length){
+                    var combine = [fn].concat( [].slice.call(arguments, 0))
+                    return Curry( FixedParamsCurry.apply(this, combine), length - arguments.length);;
+                }else{
+                    return fn.apply(this.arguments);
+                }
+            }
+        }
+
+        // var newAdd = Curry(add);
+        // var nA1 = newAdd(1)
+        // var nA2 = newAdd(2)
+
+        // POST www.test1.com 'name=css&code=111';
+        // POST www.test1.com 'key=222'
+        function ajax(method, url, data){
+            console.log(method, url, data)
+        }
+        // ajax('POST',' www.test1.com', 'name=css&code=111')
+        // ajax('POST',' www.test1.com', 'key=222')
+
+        var ajaxCurry = Curry(ajax);
+        var PostAjax = ajaxCurry('POST');
+        PostAjax('www.test1.com', 'name=css&code=111');
+        PostAjax('www.test2.com', 'name=css&code=111');
+
+
+
+
+
+
+        // console.log(newAdd(1, 2, 3, 4));
+        // newAdd(1, 2, 3, 4);
+        // newAdd(1)(2, 3)(4);
+        // newAdd(1, 2)(3)(4);
+        // newAdd(1, 2)(3, 4);
+        // newAdd(1, 2, 3)(4);
+        // newAdd(4)(1, 2, 3);
+        // newAdd(1)(2)(3)(4);
+    </script>
+</body>
+</html>

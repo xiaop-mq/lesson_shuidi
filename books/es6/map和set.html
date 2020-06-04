@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map和Set</title>
+</head>
+<body>
+    <script>
+        // set:集合 表示五重复值的有序列表
+        let set = new Set();
+        console.log(set);
+
+        // 添加元素
+        set.add(2);
+        set.add('4');
+        set.add('4');
+        set.add([1, 2, 3])
+        set.delete(2);
+        // 校验某个值是否在set中
+        console.log(set.has('4'))
+        console.log(set.size);
+
+        // set.forEach((val, key) => {
+        //     console.log(val);
+        //     console.log(key)
+        // })
+
+        // 将set转换成数组
+        let set2 = new Set([1, 2, 3, 3, 3, 4])
+
+        // 扩展运算符
+        let arr = [...set2]
+        console.log(arr)
+
+        // weakset
+        // 1. 不可传入非对象类型的参数
+        // 2. 不可迭代
+        // 3. 没有forEach()
+        // 4. 没有size属性
+
+
+        // map类型是键值对的有序列表,键和值是任意类型
+
+        let map = new Map()
+        map.set('name','张三');
+        map.set('age', '20');
+        console.log(map.get('name'));
+        console.log(map)
+        map.has('name') // true
+
+        let m = new Map([
+            ['a',1],['c',2]
+        ])
+    </script>
+</body>
+</html>

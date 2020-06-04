@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扩展的对象的功能</title>
+</head>
+<body>
+    <script>
+        // // es6直接写入变量和函数，作为对象的属性和方法
+        // const name = 'kiki',
+        //     age = 20;
+        // const person = {
+        //     name, // 等价于name: name
+        //     age,
+        //     sayName(){
+        //         console.log(this.name);
+        //     }
+        // }
+        // person.sayName();
+        
+        // 对象的方法
+        // is()===
+        // 比较两个值是否相等
+        console.log(Object.is(NaN, NaN));
+
+        // assign()
+        // 对象的合并
+        // Object.assign(target, obj1, obj2...)
+
+        // 返回合并之后的新对象
+        Object.assign({},{a:1},{b:2});
+        console.log(newObj);
+    </script>
+
+</body>
+</html>
