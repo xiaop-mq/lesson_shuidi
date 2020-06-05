@@ -1,6 +1,19 @@
 1. node 插入一条qrcode 记录，{arcode_id:, expires_at, create_at}生成一个二维码图片
 2. PC端的登录页， 二维码， 显示出来
 3. 扫码 得到 qrcodeId 使用 postmon来模拟
+4. 手机端 登录状态， 表单登录不做 用postman 模拟
+  - 注册 -> 登录 cookie  jwt有token 手机准备好了
+  现在已经是登陆后的状态
+5. 手机真正扫码 走服务器端， 将qrcodeId 跟token结合
+   手机端带着token 访问 /qrcode/scanned
+6. 手机端会出来一个 授权，或取消的页面， qrcode 记录还要等待被刷新
+6. 轮询
+
+
+
+authenticated?是什么？？ 中间件函数
+
+
 
 PC端扫码登陆方案，并需要传递哪些信息？
 
