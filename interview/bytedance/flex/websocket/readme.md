@@ -2,6 +2,9 @@
 wss:  http  https
 1. 二维码扫描问题 使用轮询，不对的。
  轮询 -> 长轮询 —> websocket
+
+web im 实时通讯
+
 缺点：
 setInterval(() => {
     // 错过一些数据，不同步
