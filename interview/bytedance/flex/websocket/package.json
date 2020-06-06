@@ -1,0 +1,12 @@
+{
+  "name": "websocket",
+  "version": "1.0.0",
+  "description": "- http -> switch protocol tcp 连接不关闭，数据通过服务器端可以推送数据到客户端\r wss:  http  https\r 1. 二维码扫描问题 使用轮询，不对的。\r  轮询 -> 长轮询 —> websocket\r 缺点：\r setInterval(() => {\r     // 错过一些数据，不同步\r },300)\r 2. 长轮询\r 3. websocket\r - http开销太高了",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
