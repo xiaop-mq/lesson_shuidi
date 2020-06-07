@@ -1,4 +1,3 @@
-// 通用的
 module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']

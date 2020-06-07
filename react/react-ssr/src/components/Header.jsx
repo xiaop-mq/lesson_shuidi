@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 // 服务端有 click 事件？并没有
 // DOM click
 // 组件
@@ -11,7 +12,16 @@ class Header extends Component {
   }
   render() {
     return (
-      <button onClick={this.handleClick}> 123456 </button>
+      <React.Fragment>
+        {/* js 为什么要在前端运行 */}
+        <button onClick={this.handleClick}> 123456 </button>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/login">login</Link>
+        </li>
+      </React.Fragment>
     )
   }
 }

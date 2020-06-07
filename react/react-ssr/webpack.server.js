@@ -1,6 +1,6 @@
 const path = require('path')
-const nodeExternals = require('webpack-node-externals');// 加载外部CDN资源
-const merge = require('webpack-merge'); // 合并两个文件
+const nodeExternals = require('webpack-node-externals');
+const merge = require('webpack-merge');
 const config = require('./webpack.base.js');
 
 const serverConfig = {
