@@ -1,0 +1,15 @@
+{
+  "name": "sanyuan",
+  "version": "1.0.0",
+  "description": "- 三元的逐行读VUE源码\r 1. 组件的本质是什么？\r 历史来讲(前端变得复杂起来，jquery?? )   现在vue2.0语法由来()  未来vue3.0\r loadsh  jquery ->强大的前端工具库RIA   MVVM\r 模板编译的语法 \r 2. lodash:通过使用数组，数字，对象，字符串等方法，Lodash使JavaScript变得更简单。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^1.12.4"
+  }
+}
