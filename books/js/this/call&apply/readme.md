@@ -15,3 +15,5 @@ foo.fn()
 delete foo.fn
 ```
 fn 是对象的属性名，反正最后也要删除它，所以起程什么都无所谓。
+
+## this参数可以传null,当为null的时候，视为指向window
