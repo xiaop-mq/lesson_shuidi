@@ -1,0 +1,11 @@
+{
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+            // 新版本 
+          "useBuiltIns": "entry"
+        }
+      ]
+    ]
+  }
