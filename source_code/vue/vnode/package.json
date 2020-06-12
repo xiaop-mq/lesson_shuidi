@@ -1,0 +1,16 @@
+{
+  "name": "vnode",
+  "version": "1.0.0",
+  "description": "- 想在阿里等大公司打动面试官？  一定是vue源码\r 1. 难\r   小册(几个点) -> 打破砂锅问到底\r   耐心",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html --open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.10.2",
+    "parcel-bundler": "^1.12.4"
+  }
+}
