@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script>
+        'use strict'
+        function func(){
+            // 非严格模式下
+            // 指向包装类
+            console.log(this)
+        }
+
+        // func.call(1); // 传递简单数据类型 number{1}
+        func.call(null) // 不使用严格模式指向window
+        // 使用严格模式下指向null
+    </script> -->
+     <script>
+         var personLike = {
+             0: 'xiaop',
+             1: 'kiki',
+             length: 2 // 内置属性
+         }
+         Array.prototype.push.call(personLike,'小彭', '许佳琪');
+        //  有什么方法给personLike添加两个值(eliwa,linda)，它的key无所谓
+        console.log(personLike);
+     </script>
+</body>
+</html>
