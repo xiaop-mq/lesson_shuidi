@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        // 触发几次回流
+        const ele = document.querySelector('.box');
+        ele.style.left = 100 + ele.offsetLeft + 'px';
+        ele.style.top = 100 + ele.offsetTop + 'px';
+        // 可以进行代码优化 以及优化的原因
+        // 了解重绘(repaint) 重排 = 回流(reflow)
+        // 浏览器有个优化机制，形成队列 csstextT
+        // offsetLeft offsetTop属于布局信息 Layout
+        // 读取，冲破浏览器优化，重绘的队列被清空
+        const currentLeft = ele.offsetLeft,
+        currentTop = ele.offsetTop; // restore
+
+        ele.style.left = 100 + currentLeft + 'px';
+        ele.style.top = 100 + currentTop + 'px';
+    </script>
+</body>
+</html>
