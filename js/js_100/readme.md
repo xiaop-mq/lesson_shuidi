@@ -17,6 +17,13 @@ VUE的响应式原理中的Object.defineProperty有什么缺陷?
 
 # JS一百问???
 
+## 写 React / Vue 项目时为什么要在列表组件中写 key，其作用是什么?
+- key的作用是什么?
+主要是为了diff同级比较的效率
+1. 更准确
+因为带key就不是就地复用了,在sameNode函数a.key=== b.key对比中可以避免就地服用的情况.所以会更准确.
+2. 更快
+利用key的唯一性生成map对象来获取对应节点,比遍历方式更快.
 ## 介绍下HTTPS中间人攻击
  https = http + ssl协议组成
 中间人攻击过程如下:
