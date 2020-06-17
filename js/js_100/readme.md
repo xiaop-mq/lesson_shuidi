@@ -38,3 +38,9 @@ VUE的响应式原理中的Object.defineProperty有什么缺陷?
 
 防范方法:
 服务端在发送浏览器的公钥中加入CA证书,浏览器可以验证CA证书的有效性.
+
+## React中的retState什么时候是同步的，什么时候是异步的？
+
+注意：react的同步和异步，并不是真正意义上的同步异步。react的异步代表的是指多个state会合并到一起进行批量更新。
+
+- 如果是由react引发的事件处理(比如onclick引发的事件处理)，调用setState不会同步更新this.state，除此之外的setState调用会同步执行this.state
