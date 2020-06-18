@@ -68,4 +68,81 @@ VUE的响应式原理中的Object.defineProperty有什么缺陷?
     - 避免频繁读取会引发回流/重绘的属性
     - 对具有复杂动画的元素使用绝对定位
 
-    
+## 介绍下 npm 模块安装机制，为什么输入 npm install 就可以自动安装对应的模块？
+- npm模块安装机制：
+  - 发出npm install命令
+  - 查询node_modules目录之中是否已经存在指定模块
+      - 存在，则不需要重新安装
+      - 不存在：
+         1. npm向register查询网址
+         2. 下载压缩快
+         3. 解压压缩包
+
+- npm实现原理
+  - 执行工程自身preinstall
+  - 确定首层依赖模块
+  - 获取模块
+  - 模块扁平化
+
+## 浏览器和Node 事件循环的区别
+- 主要的区别在于执行的顺序不同
+node.js中有micro event;
+promise属于micro event 该一部事件的处理顺序与浏览器不同，nodejs 11.0以上，这两者执行顺序相同。
+
+## 模块化发展历程
+模块化的作用：抽离公共代码、隔离作用域、避免变量冲突
+- `IIFE`：使用自执行函数来编写模块化。
+   - 特点：在一个单独的函数作用域内执行代码，避免变量冲突。
+   ```js
+    (function(){
+    return {
+    data:[]
+    }
+  })()
+   ```
+- `AMD`: 使用requireJS来编写模块化
+   - 特点：以来必须提前声明好
+   ```js
+    define('./index.js',function(code){
+    // code 就是index.js 返回的内容
+  })
+   ```
+-` CMD:` 使用searJS来编写模块化
+   - 特点：支持动态引入依赖文件。
+   ```js
+   define(function(require, exports, module) {  
+  var indexCode = require('./index.js');
+  });
+   ```
+- `commonJS`: nodeJS自带模块化
+  ```js
+  var fs = require('fs');
+  ```
+- `UMD`: 兼容AMD，CommonJS模块语法化
+- `webpack`: webpack2.x版本中代码分割
+- `ES Modules`: ES6引入的模块化，支持import来引入另一个JS
+
+## 关于 const 和 let 声明的变量不在 window 上 
+- 在es5中，顶层对象的属性和全局变量是等价的，var命令和function命令声明全局变量，自然也是顶层对象。
+```js
+var a = 12;
+function f(){};
+
+console.log(window.a); // 12
+console.log(window.f); // f(){}
+```
+- 但ES6规定，var和function命令声明的全局变量，依旧是顶层对象的属性，但是let、const、class命令声明的全局变量，不属于顶层对象的属性
+```js
+let aa = 1;
+const bb = 2;
+
+console.log(window.aa); // undefined
+console.log(window.bb); // undefined
+```
+- 怎么获取？在定义变量的块级作用域中就能获取。
+
+## cookie 和 token 都存放在 header 中，为什么不会劫持 token？
+- token不是防止XSS的，而是为了防止CSRF的。
+- CSRF攻击的原因是浏览器会自动带上cookie，而浏览器不会带上token.
+
+## 谈谈view的双向数据绑定，model如何改变view,view又是如何改变model的？
