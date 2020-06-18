@@ -59,3 +59,27 @@ SEO优化：
 - location.hash路由代表的时URL#后面的内容
 - history路由采用了HTML5的API来实现，使用hietory.pushState()和history.replaceState()
 
+## nextTick知道吗，实现原理是什么？
+在下次DOM更新循环结束之后执行延迟回调。nextTick主要使用了宏仁务和微任务。根据执行环境分别采用
+- promise
+- MutationObserver
+- setImmediate
+- 如果以上都不行则采用setTimeout
+定义异步方法，多次调用nextTick会将方法存入队列中，通过这个异步方法清空当前队列。
+
+## vue生命周期
+- beforeCreate: 在创建new Vue()第一个钩子函数，在这个阶段data、compouted、methods以及watch上的数据和方法都不能被访问。
+- created: 在实例创建后发生，当前阶段已经完成了对数据的观测，也就是可以使用数据、更改数据，做一些数据初始化的操作。这个阶段的操作不会触发update函数，不会和DOM做一些交互，如果想与DOM进行交互，可以使用$vm.nextTick
+- beforeMount: 发生在挂载之前，在此之前模板引擎template已经导入到渲染函数编译。当前DOM创建已经完成，即将开始渲染。在此之前可以对数据进行修改，不会触发updated.
+- mounted: 发生在挂载完成之后，当前阶段，真实的DOM挂载完毕，数据完成双向绑定，可以访问到DOM节点，使用$refs属性对DOM进行操作。
+- beforeUpdate：发生在更新之前，也就是响应式数据发生更新，虚拟DOM重新渲染之前被处罚，你可以在当前阶段进行更改数据，不会造成重渲染。
+- updated：发生在更新完成之后，当前阶段DOM已经更新。要注意的是避免在此阶段进行更新，可能导致无线循环的更新。
+- beforeDestory：发生在实例销毁之前，在当前阶段实例完全可以被使用，我们可以在这时进行收尾工作，比如清除计时器。
+- destoryed：发生在销毁之后，这个时候只剩下DOM空壳，组件已经被拆除，数据绑定被卸除，监听被移除，子实例也统统被销毁。
+
+## 你的接口一般放在哪个生命周期中？
+- 接口请求一般放在mounted中，但要注意的是服务端渲染时不支持mounted,需要放到created中。
+
+## v-if和v-show的区别：
+- 当条件不成立时，v-if不会渲染DOM元素。
+- v-show切换的是样式，切换当前DOM的显示和隐藏。
