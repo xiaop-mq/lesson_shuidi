@@ -160,3 +160,71 @@ React 从来没有说过 “React 比原生操作 DOM 快”。React 的基本�
 
 - 性能比较也要看场合
 以上这些比较，更多的是对于框架开发研究者提供一些参考。主流的框架 + 合理的优化，足以应对绝大部分应用的性能需求。如果是对性能有极致需求的特殊情况，其实应该牺牲一些可维护性采取手动优化：比如 Atom 编辑器在文件渲染的实现上放弃了 React 而采用了自己实现的 tile-based rendering；又比如在移动端需要 DOM-pooling 的虚拟滚动，不需要考虑顺序变化，可以绕过框架的内置实现自己搞一个。
+
+## 为什么vuex的mutation和redux的reducer中不能做异步操作？
+因为更改state的函数必须是纯函数，纯函数即是统一输入就会统一输出，没有任何副作用；如果是异步则会引入额外的副作用，导致更改后的state不可预测；
+
+## 介绍下BFC及其应用
+- BFC就是`块级格式上下文`，是页面盒模型布局中的一种CSS渲染模式，相当于独立的容器，里面的元素和外部元素互不影响。创建BFC的方式有：
+  - html根元素
+  - float浮动
+  - 绝对定位
+  - overflow不为visiable
+  - display 为表格布局或者弹性布局
+- BFC的主要作用是：
+  - 清理浮动
+  - 放在同一BFC容器中的相邻元素间的外边距重叠问题。
+
+## 在 Vue 中，子组件为何不可以修改父组件传递的 Prop，如果修改了，Vue 是如何监控到属性的修改并给出警告的。
+- 子组件为何不可以修改父组件传递的prop
+  单向数据流，易于监测数据的流动，`出了错误可以更加迅速的定位到发生错误的位置`。
+- 如果修改了，vue是如何监控到属性的修改并给出警告的。
+```js
+if (process.env.NODE_ENV !== 'production') {
+      var hyphenatedKey = hyphenate(key);
+      if (isReservedAttribute(hyphenatedKey) ||
+          config.isReservedAttr(hyphenatedKey)) {
+        warn(
+          ("\"" + hyphenatedKey + "\" is a reserved attribute and cannot be used as component prop."),
+          vm
+        );
+      }
+      defineReactive$$1(props, key, value, function () {
+        if (!isRoot && !isUpdatingChildComponent) {
+          warn(
+            "Avoid mutating a prop directly since the value will be " +
+            "overwritten whenever the parent component re-renders. " +
+            "Instead, use a data or computed property based on the prop's " +
+            "value. Prop being mutated: \"" + key + "\"",
+            vm
+          );
+        }
+      });
+    }
+```
+在initProps的时候，在defineReactive时通过判断是否在开发环境，如果是开发环境，会在触发set的时候判断是否key处于updatingChildren中被修改，如果不是，说明此修改来自子组件，触发warning提示。
+
+## 介绍HTTPS的握手过程
+
+
+## 双向绑定和 vuex 是否冲突
+- 在严格模式下使用vuex，当用户输入时，v-model会试图直接修改属性值，但这个修改不是在mutation中修改的，所以会抛出一个错误。
+- 当需要在组件中使用vuex中的state时，有两种解决方案：
+   - 在input中绑定value(vuex中的state)，然后监听input的change或者input事件，在事件回调中调用mutation修改state的值
+   - 使用带有setter的双向绑定计算属性
+
+
+## call和apply区别是什么，哪个性能更好一些？
+
+- function.prototype.call和function.prototype.apply作用都是一样的，区别在于传入的参数不同：
+   - 第一个参数都是，指定函数体内this的指向；
+   - 第二个参数开始不同，`apply是传入带下标的集合，数组或者类数组`，apply把它传给函数作为参数，call从第二个开始传入的参数是不固定的，`都会传给函数做参数`。
+- call比apply的性能要好，平常可以多用call,call传入的参数格式正是内部所需要的格式。
+
+## 为什么通常在发送数据埋点请求的时候使用的是 1x1 像素的透明 gif 图片？
+- 能够完成整个HTTP请求 + 响应
+- 触发GET请求之后不需要获取和处理数据、服务器也不需要发送数据
+- 跨域友好
+- 执行过程无阻塞
+- 相比XMLHttpRequest对象发送GET请求，性能上更好
+- GIF的最低合法体积最小
