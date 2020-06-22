@@ -228,3 +228,36 @@ if (process.env.NODE_ENV !== 'production') {
 - 执行过程无阻塞
 - 相比XMLHttpRequest对象发送GET请求，性能上更好
 - GIF的最低合法体积最小
+
+## Vue 的响应式原理中 Object.defineProperty 有什么缺陷？为什么在 Vue3.0 采用了 Proxy，抛弃了 Object.defineProperty？
+
+- Object.defineProperty`无法实时监控到数组下标`的变化，导致通过数组下标添加元素，不能实时响应。
+- Object.defineProperty`只能劫持对象的属性`，从而需要整个对象，如果属性是对象，还需要深度遍历。Proxy可以劫持整个对象，并返回一个新的对象。
+- Proxy不仅可以代理对象，还可以代理数组。还可以代理动态增加的属性。
+
+
+
+## 箭头函数与普通函数（function）的区别是什么？构造函数（function）可以使用 new 生成实例，那么箭头函数可以吗？为什么？
+箭头函数是普通函数的缩写，可以更优雅的定义一个函数，和普通函数相比，有以下几点差异。
+- 函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。
+- 不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用rest参数代替。
+- 不可以使用yield命令，因此箭头函数不能用作generator函数。
+- 不可以使用new命令
+   - 没有自己的this，无法使用call, apply
+   - 没有prototype属性，而new命令在执行时需要将构造函数的prototype赋值给新的对象_proto_
+
+
+## 分析比较 opacity: 0、visibility: hidden、display: none 优劣和适用场景
+- 结构：
+  - display: none：会让元素完全从渲染树中消失，渲染不占空间，不能点击。
+  - visibility: hidden;不会让元素完全从渲染树中消失，渲染占用空间，内容不可见，不能点击
+  - opacity: 0;不会再渲染树中消失，占据空间，内容不可见，可以点击。
+  
+- 继承：
+  - display: none和opacity: 0是非继承属性，子孙节点消失由于元素从渲染时消失造成，通过修改子孙节点属性无法显示。
+  - visibility: hidden;是继承属性，子孙节点由于继承了hidden，通过设置visibility：visable可以让子孙节点显示。
+
+- 性能：
+  - display: none修改元素会造成文档回流，读屏器不会读取display:none元素内容，性能消耗较大。
+  - visibility: hidden，修改元素指挥造成本元素的重绘，性能消耗较少读屏器读取visibility：hidden内容
+  - opacity: 0 修改元素造成重绘，性能消耗较少。
