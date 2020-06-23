@@ -261,3 +261,38 @@ if (process.env.NODE_ENV !== 'production') {
   - display: none修改元素会造成文档回流，读屏器不会读取display:none元素内容，性能消耗较大。
   - visibility: hidden，修改元素指挥造成本元素的重绘，性能消耗较少读屏器读取visibility：hidden内容
   - opacity: 0 修改元素造成重绘，性能消耗较少。
+
+
+## 如何实现token加密？
+jwt做法： 
+- 需要一个secret(随机数)
+- 后端利用secret和加密算法生成一个token，返回给前端。
+- 前端每次request在header中带上token
+- 后端利用同样的方法进行解密
+
+## redux为什么要把reduce设计成纯函数？
+- 因为redux设计思想是不产生副作用，数据更改的状态可回溯，因此将reduce设计成了纯函数。
+
+## 如何实现一个无缝轮播？
+简单的来说，无缝轮播的核心就是一个连续的效果。最简单的就是，复制一个要轮播的元素。当复制元素滚动到目标位置的时候，把原来的元素进行归位操作，以达到无缝轮播的效果。
+
+## a.b.c.d 和 a['b']['c']['d']
+a.b.c.d比a['b']['c']['d']性能更高，后者还要考虑[]的情况，再者，从两种形式结构来看，显然编译器解析前者比后者容易些，自然也就快一些。
+
+## ES6代码转化为ES5代码的思路
+- 将ES6代码转化为AST(抽象语法树)
+- 对AST进行处理，在这个阶段可以对ES6代码进行转换成ES5代码
+- 根据处理后的AST树再生成代码字符串
+
+## 如何解决移动端 Retina 屏 1px 像素问题
+- 伪元素 + transform scaleY(.5)
+- border-image
+- background-image
+- box-image
+
+## 介绍下 webpack 热更新原理，是如何做到在不刷新浏览器的前提下更新页面
+- 当修改了一个或多个文件
+- 文件系统接收更改并通知webpack
+- webpack重新编译构建一个或多个模块，并通知HMR服务器进行更新；
+- HMR Server使用webSocket通知HMR runtime需要更新，HMR运行时通过HTTP请求更新jsonp
+- HMR运行时替换更新中的模块，如果确定这些模块无法更新，则出发整个页面刷新。
