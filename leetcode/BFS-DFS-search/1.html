@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* normal */
+    .cell {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: gray;
+      border-bottom: solid 1px white;
+      border-right: solid 1px white;
+      vertical-align: middle;
+    }
+    #container {
+      width: 701px;
+      line-height: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    const container = document.getElementById('container')
+    const map = new Array(10000).fill(0);
+    map.forEach((e, i) => {
+      let cell = document.createElement("div");
+      cell.classList.add("cell");
+      // 如果为1 代表 在轨迹之上 黑背景
+      if (map[i] === 1)
+        cell.style.backgroundColor = 'black';
+      cell.addEventListener("mouseover", () => {
+        if (mouse) {
+          if (clear) {
+            cell.style.backgroundColor = '';
+            map[i] = 0;
+          } else {
+            cell.style.backgroundColor = 'black';
+            map[i] = 1;
+          }
+        }
+      })
+      container.appendChild(cell)
+    })
+    let mouse = false;
+    let clear = false;
+    // 按下鼠标划线
+    document.addEventListener('mousedown', e => {
+      mouse = true;
+      clear = (e.which === 3);
+    })
+    document.addEventListener('mouseup', () => mouse = false);
+    function sleep(t) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve()
+        }, t)
+      })
+    }
+    async function findPath(map, start, end) {
+      let queue = [ start ];    // 所有可以走的路
+      async function insert(newX, newY, prePoint) {
+        if(map[newY * 100 + newX] !== 0) return;  //newX, newY 点 => map 一维数组
+        if (newX < 0 || newY < 0 || newX > 100 || newY > 100) return;
+        // map[newY * 100 + newX] = 3;           // 已经走过
+        // 新点由哪个点过来的
+        map[newY * 100 + newX] = prePoint;
+        container.children[newY * 100 + newX].style.backgroundColor = 'green';
+        await sleep(5);
+        console.log(newX, newY);
+        queue.push([newX, newY]);
+      }
+      while(queue.length) {
+        let [x, y] = queue.shift();
+        if(x === end[0] && y === end[1]) {
+          // [x, y] 由终点反推到起点。
+          let path = [];
+          while (x !== start[0] || y !== start[1]) {
+            path.push([x, y]);
+            container.children[100 * y + x].style.backgroundColor = 'red';
+            [x, y] = map[100 * y + x];
+          }
+          return true;
+        }
+        await insert(x + 1, y, [x, y])
+        await insert(x - 1, y, [x, y])
+        await insert(x, y + 1, [x, y])
+        await insert(x, y - 1, [x, y])
+        
+      }
+      return false;
+    }
+
+    // findPath(map, [0, 0], [50, 50]);
+  </script>
+</body>
+</html>
