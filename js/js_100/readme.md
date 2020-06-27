@@ -296,3 +296,73 @@ a.b.c.d比a['b']['c']['d']性能更高，后者还要考虑[]的情况，再者�
 - webpack重新编译构建一个或多个模块，并通知HMR服务器进行更新；
 - HMR Server使用webSocket通知HMR runtime需要更新，HMR运行时通过HTTP请求更新jsonp
 - HMR运行时替换更新中的模块，如果确定这些模块无法更新，则出发整个页面刷新。
+
+## 为什么普通for循环的性能远远高于forEach的性能，请解释其中的原因
+node情况下:
+```js
+let arrs = new Array(100000);
+
+console.time('for');
+for (let i = 0; i < arrs.length; i++) {
+
+};
+console.timeEnd('for');
+
+console.time('forEach');
+	
+arrs.forEach((arr) => {
+ 
+});
+console.timeEnd('forEach');
+
+// for: 2.263ms
+// forEach: 0.254ms
+```
+- 在10万这个级别下，foreach的性能是for的10倍。
+
+- 在100万的级别下，forEach的性能是和for的一致。
+for: 2.844ms
+forEach: 2.652ms
+
+- 在1000万级以上的量级上 ， forEach 的性能远远低于for的性能
+for: 8.422ms
+forEach: 30.328m
+
+## 介绍下BFC、IFC、GFC、FFC
+FC格式上下文，页面中的渲染区域，以及渲染的规则。决定了元素的定位以及元素间的关系。
+- BFC块级格式上下文
+  - 独立块级渲染区域，这个区域拥有一套渲染规则来约束块级盒子布局，且与区域外部盒子无关。
+  - BFC渲染规则：
+    1. 内部的BOX会在垂直方向上一个接一个的放置；
+    2. 垂直方向上的距离由margin决定。（完整的说法是：属于同一个BFC的俩个相邻的BOX的margin会发生重叠，与方向无关。）
+    3. 每个元素的左外边距与包含块的左边界相接触（从左到右），即使浮动元素也是如此。（这说明BFC中的子元素不会超出它的包含块，而position为absolute的元素可以超出它的包含块边界）；
+    4. BFC的区域不会与float的元素区域重叠；
+    5. 计算BFC的高度时，浮动子元素也参与计算；
+    5. BFC就是页面上的一个隔离的独立容器，容器里面的子  元素不会影响到外面的元素，反之亦然；
+  - BFC的应用
+    1. 防止margin发生重叠
+    2. 防止发生因浮动导致的高度塌陷
+  - 怎么生成BFC？
+    1. float的值不为none;
+    2. overflow的值不为visiable
+    3. position的值为absolute或者fixed
+    4. display的值为inline block table cell tabel-caption;
+  - display：table的也认为可以生成BFC?
+    其实在于table会默认生成table-cell，这个table-cell生成了BFC。
+
+- IFC内联格式上下文
+  - 行内元素中的line box是由行内元素中的最高实际元素计算的。
+  - IFC有的特性
+    1. IFC的line box的左右都紧贴整个IFC，但是会因为float元素扰乱。
+    2. IFC不可能有块级元素，当插入块级元素时会产生两个匿名块与div分开，即产生两个IFC。
+  - IFC的应用
+    1. 水平居中：inline-block可以设置为text-align十七水平居中。
+    2. 垂直居中：vertical-align: middle.
+
+- GFC网格格式上下文
+  - 当设置display属性为grid时，这个元素会拥有独立的区域，我们可以网格定义行和网格定义列。
+  - GFC改变传统布局模式，将一维布局变为二维布局。有了GFC之后，不再限于单个维度。
+
+- 自适应格式上下文
+  - display的属性为flex或者inline-flex会生成。
+  - Flex Box由伸缩容器和伸缩项目组成。通过设置display属性为flex或inline-flex时设置伸缩容器。
