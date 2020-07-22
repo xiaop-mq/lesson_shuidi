@@ -1,0 +1,38 @@
+<!-- html代码 vuew层 模板 -->
+<!-- v-model双向数据绑定 -->
+<div id="app">
+    <!-- 将message绑定到当前元素并监听其变化 -->
+    <input type="text" placeholder="请输入" v-model="message" />
+    <br />
+    <p>数据：{{ message }}</p>
+</div>
+<!-- 引入相关文件创建实例 再写实例的各种方法 -->
+<script src="vue_2.2.0.js"></script>
+<script type="text/javascript">
+      document.addEventListener('DOMcontentLoaded', function(){
+          let data = {
+              message: 'hello vue'
+          }
+        //   vm实例
+        var vm = new Vue({
+            el: '#app', // 挂载DOM
+            data: {
+                message: 'hello '
+            },
+            methods: {
+                test(){
+                    alert(1)
+                }
+            },
+            components:{
+                // 这里存放组件
+            }
+        })
+      }, false)
+      console.log(vm.$data);
+</script>
+
+
+
+
+
