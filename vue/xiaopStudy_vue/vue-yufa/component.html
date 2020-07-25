@@ -1,0 +1,186 @@
+<body>
+    <div class="app">
+        <my-component></my-component>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        // 注册全局组件
+        Vue.component('myComponent',{
+            template: `<h2>我是全局组件</h2>`
+        })
+        var vm = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+
+
+
+<body>
+    <div class="app">
+        <!-- 注册局部组件 -->
+        <my-component></my-component>
+        <common></common>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var Child = {
+            template: `<h3>我是局部组件</h3>`
+        }
+        var common = {
+            template: `<p>我是局部组件</p>`
+        }
+        var vm = new Vue({
+            el: '.app',
+            components:{
+                // <my-component> 将只在父模板可用
+                    myComponent: Child,
+                    common 
+            }
+        })
+    </script>
+</body>
+
+
+<body>
+    <div class="app">
+        <my-component></my-component>
+        <common></common>
+    </div>
+    <!-- type="x-template" 是为了不让这个script进行解析  -->
+    <!-- 用script标签名的方式 -->
+    <script id="component1" type="x-template">
+            <h3>第一个局部组件——定义方式1</h3>
+    </script>
+    <!-- 用 template标签名的方式  推荐-->
+    <template id="component2">
+        <p>第二个局部组件——定义方式2</p>
+    </template>
+<script src="vue.js"></script>
+<script>
+    var Child = {
+        template:`#component1`
+    };
+    var common = {
+        template: `#component2`
+    }
+    var vm = new Vue({
+        el: '.app',
+        components: {
+            // <my-component> 将只在父模板可用
+            myComponent: Child,
+            common //如果组件定义的名字和在html显示的标签名一致就可以省略
+        }
+    });
+</script>
+</body>
+
+
+<!-- 组件中定义组件 -->
+<body>
+    <div class="app">
+        <my-component></my-component>
+    </div>
+    <!-- 使用template方式 -->
+    <template id="myMsg">
+        <div>
+            <p>父组件 => {{msg}}</p>
+            <child></child>
+            <child2></child2>
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    <script>
+        var component = {
+            template: `#myMsg`,
+            data(){
+                return{
+                    msg: '我是父组件中的数据'
+                }
+            },
+            components:{
+                child:{
+                    template: `<p>我是第一个子组件</p>`
+                },
+                child2:{
+                    template: `<p>我是第二个子组件</p>`
+                }
+            }
+        }
+        var vm = new Vue({
+            el: '#app',
+            components:{
+                myComponent
+            }
+        })
+    </script>
+</body>
+
+
+<body>
+    <div class="app">
+        <div>
+            <router-link to="/home">主页</router-link>
+            <router-link to="/news">新闻</router-link>
+        </div>
+        <div>
+            <router-view></router-view>
+        </div>
+    </div>
+    <template id="news">
+        <div>
+            <h2>我是新闻页面</h2>
+            <ul>
+                <li>
+                    <router-link to="/news/details/001?a=1">详细新闻</router-link>
+                    <router-link to="/news/details/002">详细新闻2</router-link>
+                    <router-link to="/news/details/003">详细新闻3</router-link>
+                </li>
+                <div>
+                    <router-view></router-view>
+                </div>
+            </ul>
+        </div>
+        </template>
+        <script>
+            // 组件
+            var Home = {
+                template: `<h2>我是主页</h2>`
+            }
+            var News = {
+                template: `#news`
+            };
+            var Details = {
+                template: `<p>{{ $route.params }} => {{ $route.query }} => {{ $route.path }}</p>`
+            }
+            // 配置路由
+            const routes = [
+                {
+                    path: '/home',
+                    component: Home
+                },
+                {
+                    path: '/news',
+                    component: News,
+                    children: [
+                        {
+                            path: 'detail/:id',
+                            component: Detail
+                        }
+                    ]
+                },
+                {
+                    path: '*',
+                    redirect: '/home'
+                }
+            ]
+            const router = new VueRouter({
+                routes
+            });
+            // 挂载到vue实例上
+            const vm = new Vue({
+                el: '.app',
+                router
+            })
+        </script>
+</body>

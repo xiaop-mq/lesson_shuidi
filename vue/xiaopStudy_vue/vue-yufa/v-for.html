@@ -1,0 +1,18 @@
+<body>
+    <div class="app">
+        <ul>
+            <li v-for="(val, key) in fruitArr">{{ val }} => {{ key }}</li>
+        </ul>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function(){
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                fruitArr: ['apple', 'banana', 'orange', 'pear']
+            }
+        })
+    }, false)
+</script>
